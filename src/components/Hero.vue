@@ -6,8 +6,9 @@
       <div class="book-cover-wrap">
         <div class="book-cover-frame">
           <img
-            src="/images/book-cover.webp"
-            alt="Portada del libro Letras Dispersas de MaryLó"
+            v-if="!coverError"
+            src="/images/book-cover.png"
+            alt="Portada del libro Letras Dispersas de Mary López"
             class="book-cover"
             width="380"
             height="550"
@@ -15,9 +16,9 @@
             @error="coverError = true"
           />
           <!-- Placeholder shown if image fails to load -->
-          <div v-if="coverError" class="cover-placeholder" aria-hidden="true">
+          <div v-else class="cover-placeholder" aria-hidden="true">
             <span class="cover-placeholder-title">Letras<br/>Dispersas</span>
-            <span class="cover-placeholder-author">MaryLó</span>
+            <span class="cover-placeholder-author">Mary López</span>
           </div>
         </div>
       </div>
@@ -28,7 +29,7 @@
 
         <h1 id="book-title" class="book-title">Letras<br class="title-br"/> Dispersas</h1>
 
-        <p class="book-author">por <strong>MaryLó</strong></p>
+        <p class="book-author">por <strong>Mary López</strong></p>
 
         <p class="book-tagline">
           <em>Un clamor lírico contra el olvido<br/>y la indiferencia</em>

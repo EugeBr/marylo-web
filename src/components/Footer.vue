@@ -19,7 +19,7 @@
               href="https://www.instagram.com/marylowriter/"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Instagram de MaryLó (se abre en nueva pestaña)"
+              aria-label="Instagram de Mary López (se abre en nueva pestaña)"
             >
               Instagram
             </a>
@@ -44,7 +44,7 @@
     <div class="footer-bottom">
       <div class="container">
         <p>
-          &copy; {{ currentYear }} MaryLó · Publicado por
+          &copy; {{ currentYear }} Letras Dispersas · Publicado por
           <a
             href="https://editorial.talondeaquiles.es/"
             target="_blank"
