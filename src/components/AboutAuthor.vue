@@ -8,15 +8,16 @@
       <div class="author-photo-wrap">
         <div class="author-photo-frame">
           <img
+            v-if="!photoError"
             src="/images/author.jpg"
-            alt="Fotografía de MaryLó, autora de Letras Dispersas"
+            alt="Fotografía de Mary López, autora de Letras Dispersas"
             class="author-photo"
             width="400"
             height="500"
             loading="lazy"
             @error="photoError = true"
           />
-          <div v-if="photoError" class="author-photo-placeholder" aria-hidden="true">
+          <div v-else class="author-photo-placeholder" aria-hidden="true">
             <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" aria-hidden="true">
               <circle cx="12" cy="8" r="4"/>
               <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
@@ -29,7 +30,7 @@
       <!-- Bio -->
       <div class="author-bio">
         <span class="section-label">La autora</span>
-        <h2 id="about-heading" class="author-name">MaryLó</h2>
+        <h2 id="about-heading" class="author-name">Mary López</h2>
 
         <div class="bio-text">
           <!-- AUTHOR_BIO_PENDING — reemplazar con la biografía real cuando esté disponible -->
@@ -49,20 +50,10 @@
               href="https://www.instagram.com/marylowriter/"
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Perfil de Instagram de MaryLó (se abre en nueva pestaña)"
+              aria-label="Perfil de Instagram de Mary López (se abre en nueva pestaña)"
             >@marylowriter</a>.
           </p>
         </div>
-
-        <a
-          href="https://editorial.talondeaquiles.es/product/letras-dispersas/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="btn btn-primary"
-          aria-label="Comprar Letras Dispersas (se abre en nueva pestaña)"
-        >
-          Comprar el libro
-        </a>
       </div>
 
     </div>

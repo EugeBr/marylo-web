@@ -9,7 +9,7 @@
           <em>Cuéntame.</em>
         </h2>
         <p class="contact-subtitle">
-          Me alegra mucho saber qué te pareció el libro, si tienes alguna pregunta
+          Me gustaría mucho saber qué te pareció el libro, si tienes alguna pregunta
           o simplemente quieres decir hola. Leo todos los mensajes.
         </p>
       </div>
@@ -30,13 +30,6 @@
         novalidate
         aria-label="Formulario de contacto"
       >
-        <!-- INTEGRATION NOTE:
-             Para conectar con un servicio externo, reemplaza handleSubmit():
-             - Formspree:       POST a https://formspree.io/f/{ID}
-             - Netlify Forms:   añadir data-netlify="true" al <form>
-             - Resend / EmailJS: llamar a su API en handleSubmit()
-        -->
-
         <div class="field" :class="{ 'has-error': errors.nombre }">
           <label for="nombre">Nombre <span class="required" aria-hidden="true">*</span></label>
           <input
@@ -94,6 +87,11 @@
           <span class="required" aria-hidden="true">*</span> Campos obligatorios
         </p>
 
+        <p v-if="sendError" class="form-error" role="alert">
+          No se pudo enviar el mensaje. Intenta de nuevo o escribe directamente a
+          <a href="">malylowriter@gmail.com</a>.
+        </p>
+
         <button
           type="submit"
           class="btn btn-primary submit-btn"
@@ -112,8 +110,12 @@
 <script setup>
 import { ref, reactive } from 'vue'
 
+// Formspree form endpoint — crea un formulario en https://formspree.io y pega aquí su ID
+const FORM_ENDPOINT = 'https://formspree.io/f/TU_ID_DE_FORMSPREE'
+
 const submitted = ref(false)
 const sending = ref(false)
+const sendError = ref(false)
 
 const form = reactive({
   nombre: '',
@@ -158,12 +160,30 @@ async function handleSubmit() {
   if (!validateAll()) return
 
   sending.value = true
+  sendError.value = false
 
-  // Simulated delay — replace with real API call when integrating a form provider
-  await new Promise(r => setTimeout(r, 900))
+  try {
+    const response = await fetch(FORM_ENDPOINT, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+      body: JSON.stringify({
+        nombre: form.nombre,
+        email: form.email,
+        mensaje: form.mensaje,
+      }),
+    })
 
-  sending.value = false
-  submitted.value = true
+    if (!response.ok) throw new Error('Request failed')
+
+    submitted.value = true
+  } catch {
+    sendError.value = true
+  } finally {
+    sending.value = false
+  }
 }
 
 function resetForm() {
@@ -174,6 +194,7 @@ function resetForm() {
   errors.email = ''
   errors.mensaje = ''
   submitted.value = false
+  sendError.value = false
 }
 </script>
 
@@ -278,6 +299,16 @@ function resetForm() {
   font-size: 0.875rem;
   color: var(--color-error);
   font-style: italic;
+}
+
+.form-error {
+  font-size: 0.9375rem;
+  color: var(--color-error);
+}
+
+.form-error a {
+  color: inherit;
+  text-decoration: underline;
 }
 
 .required-note {
