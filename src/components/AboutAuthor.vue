@@ -9,7 +9,7 @@
         <div class="author-photo-frame">
           <img
             v-if="!photoError"
-            src="/images/author.jpg"
+            :src="`${BASE_URL}images/author.jpg`"
             alt="Fotografía de Mary López, autora de Letras Dispersas"
             class="author-photo"
             width="400"
@@ -45,7 +45,7 @@
             y lo hace con una sensibilidad que sacude sin estridencias.
           </p>
           <p>
-            Puedes seguir su camino literario en Instagram como
+            Puedes seguir su camino literario en Instagram
             <a
               href="https://www.instagram.com/marylowriter/"
               target="_blank"
@@ -62,6 +62,7 @@
 
 <script setup>
 import { ref } from 'vue'
+const BASE_URL = import.meta.env.BASE_URL
 const photoError = ref(false)
 </script>
 

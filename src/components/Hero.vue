@@ -7,7 +7,7 @@
         <div class="book-cover-frame">
           <img
             v-if="!coverError"
-            src="/images/book-cover.png"
+            :src="`${BASE_URL}images/book-cover.png`"
             alt="Portada del libro Letras Dispersas de Mary López"
             class="book-cover"
             width="380"
@@ -75,6 +75,7 @@
 
 <script setup>
 import { ref } from 'vue'
+const BASE_URL = import.meta.env.BASE_URL
 const coverError = ref(false)
 </script>
 
